@@ -1,4 +1,4 @@
-package com.portal.web.InterviewPortal;
+package com.portal.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,5 +1,6 @@
 package com.portal.web.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,11 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "user")
@@ -21,8 +20,8 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "userId")
-	private int id;
+	@Column(name = "user_id")
+	private int user_id;
 
 	@Column(name = "email")
 	private String email;
@@ -30,29 +29,33 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-	@Column(name = "fName")
-	private String fName;
-
-	@Column(name = "lName")
-	private String lName;
-
-	@Column(name = "role")
-	private String role;
-
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 	public User() {
 
 	}
 
-	public int getId() {
-		return id;
+	public User(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public User(String email, String password, Set<Role> roles) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getEmail() {
@@ -71,30 +74,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getfName() {
-		return fName;
-	}
-
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
-
-	public String getlName() {
-		return lName;
-	}
-
-	public void setlName(String lName) {
-		this.lName = lName;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -105,7 +84,6 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", fName=" + fName + ", lName="
-				+ lName + ", role=" + role + "]";
+		return "User [user_id=" + user_id + ", email=" + email + ", password=" + password + ", roles=" + roles + "]";
 	}
 }

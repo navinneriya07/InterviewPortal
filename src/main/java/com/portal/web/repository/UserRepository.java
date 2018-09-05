@@ -7,5 +7,5 @@ import com.portal.web.model.User;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {
-	User findByEmail(String email);
+	User findByEmailAndPassword(String email,String password);
 }

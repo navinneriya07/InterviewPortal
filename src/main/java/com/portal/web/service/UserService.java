@@ -4,7 +4,7 @@ import com.portal.web.model.User;
 
 public interface UserService {
 	
-	User findUserByEmail(String email);
+	User findUserByEmailAndPassword(String email,String password);
 
 	void saveUser(User user);
 }

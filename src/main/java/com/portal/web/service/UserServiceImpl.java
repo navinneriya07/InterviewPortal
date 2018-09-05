@@ -21,12 +21,13 @@ public class UserServiceImpl implements UserService {
 	private RoleRepository roleRepository;
 
 	@Override
-	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+	public User findUserByEmailAndPassword(String email,String password) {
+		return userRepository.findByEmailAndPassword(email,password);
 	}
 
 	@Override
 	public void saveUser(User user) {
+		
 		Role userRole = roleRepository.findByRole("ADMIN");
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
