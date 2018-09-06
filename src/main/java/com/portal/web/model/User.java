@@ -22,12 +22,24 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_id")
 	private int user_id;
+	
+	@Column(name = "fName")
+	private String fName;
+	
+	@Column(name = "lName")
+	private String lName;
 
 	@Column(name = "email")
 	private String email;
 
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "mobilenumber")
+	private String mobilenumber;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -58,6 +70,22 @@ public class User {
 		this.user_id = user_id;
 	}
 
+	public String getfName() {
+		return fName;
+	}
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+	public String getlName() {
+		return lName;
+	}
+
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -74,6 +102,22 @@ public class User {
 		this.password = password;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getMobilenumber() {
+		return mobilenumber;
+	}
+
+	public void setMobilenumber(String mobilenumber) {
+		this.mobilenumber = mobilenumber;
+	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -84,6 +128,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", email=" + email + ", password=" + password + ", roles=" + roles + "]";
+		return "User [user_id=" + user_id + ", fName=" + fName + ", lName=" + lName + ", email=" + email + ", password="
+				+ password + ", address=" + address + ", mobilenumber=" + mobilenumber + ", roles=" + roles + "]";
 	}
 }
