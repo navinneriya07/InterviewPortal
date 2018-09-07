@@ -8,4 +8,8 @@ public interface UserService {
 	User findUserByEmailAndPassword(String email,String password);
 
 	APIMessage saveUser(User user);
+	
+	APIMessage retrievePassword(User user);
+	
+	APIMessage updatePassword(User user);
 }

@@ -16,14 +16,14 @@ import com.portal.web.model.User;
 import com.portal.web.service.UserService;
 
 @Controller()
-@RequestMapping("/api/login")
+@RequestMapping("/api")
 public class LoginController {
 
 	@Autowired
 	private UserService userService;
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
+	@RequestMapping(value = "/login/validateLogin", method = RequestMethod.POST)
 	@ResponseBody
 	public User validateUserLogin(@RequestBody User user) {
 		/*
@@ -65,11 +65,29 @@ public class LoginController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value="signUp",method=RequestMethod.POST)
+	@RequestMapping(value = "/login/signUp", method = RequestMethod.POST)
 	@ResponseBody
 	public APIMessage registerUser(@RequestBody User registerUserDetails) {
-		System.out.println("registerUserDetails :"+registerUserDetails);
-		APIMessage apiMessage=userService.saveUser(registerUserDetails);
+		System.out.println("registerUserDetails :" + registerUserDetails);
+		APIMessage apiMessage = userService.saveUser(registerUserDetails);
+		return apiMessage;
+	}
+
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public APIMessage forgotPassword(@RequestBody User userDetails) {
+		System.out.println("userDetails :" + userDetails);
+		APIMessage apiMessage = userService.retrievePassword(userDetails);
+		return apiMessage;
+	}
+
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public APIMessage resetPassword(@RequestBody User userDetails) {
+		System.out.println("userDetails :" + userDetails);
+		APIMessage apiMessage = userService.updatePassword(userDetails);
 		return apiMessage;
 	}
 }
